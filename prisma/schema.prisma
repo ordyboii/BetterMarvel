@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Movie {
+  id          String @id @default(cuid())
+  title       String
+  description String
+  image       String
+
+  votesFor     Vote[] @relation("votesFor")
+  votesAgainst Vote[] @relation("votesAgainst")
+}
+
+model Vote {
+  id String @id @default(cuid())
+
+  votedFor       Movie  @relation(name: "votesFor", fields: [votedForId], references: [id])
+  votedForId     String
+  votedAgainst   Movie  @relation(name: "votesAgainst", fields: [votedAgainstId], references: [id])
+  votedAgainstId String
+}
