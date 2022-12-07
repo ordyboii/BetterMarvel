@@ -18,7 +18,7 @@ export default function VoteButton({ movie, movies }: Props) {
     setVoting(true);
 
     if (selected === movies.movieOne?.id) {
-      await fetch("/vote", {
+      await fetch("/api/vote", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -29,7 +29,7 @@ export default function VoteButton({ movie, movies }: Props) {
     }
 
     if (selected !== movies.movieOne?.id) {
-      await fetch("/vote", {
+      await fetch("/api/vote", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
