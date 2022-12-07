@@ -1,13 +1,17 @@
-import { createSignal } from "solid-js";
-import type { getMovies } from "../server/movies";
+"use client";
+
+import type { Movie, Movies } from "@server/movies";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type Props = {
-  movies: Awaited<ReturnType<typeof getMovies>>;
-  movie: Awaited<ReturnType<typeof getMovies>>["movieOne"];
+  movies: Movies;
+  movie: Movie;
 };
 
-export default function VoteButton({ movies, movie }: Props) {
-  const [voting, setVoting] = createSignal(false);
+export default function VoteButton({ movie, movies }: Props) {
+  const { refresh } = useRouter();
+  const [voting, setVoting] = useState(false);
 
   const vote = async (selected: string) => {
     if (!movies) return;
@@ -36,18 +40,17 @@ export default function VoteButton({ movies, movie }: Props) {
     }
 
     setVoting(false);
-    window.location.reload();
+    refresh();
   };
 
   if (!movie) return null;
-
   return (
     <button
-      class='px-4 py-2 bg-red-600 font-semibold text-white rounded-xl max-w-fit hover:opacity-80 disabled:opacity-60'
+      className='px-4 py-2 bg-red-600 font-semibold text-white rounded-xl max-w-fit hover:opacity-80 disabled:opacity-60'
       onClick={() => vote(movie.id)}
-      disabled={voting()}
+      disabled={voting}
     >
-      {voting() ? "Voting..." : "Better"}
+      {voting ? "Voting..." : "Better"}
     </button>
   );
 }

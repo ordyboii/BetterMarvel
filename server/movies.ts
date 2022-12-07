@@ -32,3 +32,7 @@ export const getAllMovies = () =>
       }
     }
   });
+
+export type Movies = Awaited<ReturnType<typeof getMovies>>;
+export type Movie = Awaited<ReturnType<typeof getMovies>>["movieOne"];
+export type AllMovies = Awaited<ReturnType<typeof getAllMovies>>;
