@@ -8,8 +8,6 @@ export default async function ResultsPage() {
     movie: Awaited<ReturnType<typeof getAllMovies>>[0]
   ) => {
     const { votesFor, votesAgainst } = movie._count;
-    if (votesFor + votesAgainst === 0) return 0;
-
     return (votesFor / (votesFor + votesAgainst)) * 100;
   };
 
@@ -29,12 +27,7 @@ export default async function ResultsPage() {
                 height={100}
               />
               <h2 className='sm:text-center'>{movie.title}</h2>
-              <p>
-                {getCountPercent(movie) % 1 !== 0
-                  ? getCountPercent(movie).toFixed(2)
-                  : getCountPercent(movie)}
-                %
-              </p>
+              <p>{getCountPercent(movie).toFixed(2)}%</p>
             </li>
           ))}
         </ul>
