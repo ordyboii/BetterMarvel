@@ -1,8 +1,6 @@
 import { getMovies } from "@server/movies";
 import MovieCard from "./movie-card";
 
-export const dynamic = "force-dynamic";
-
 export default async function RootPage() {
   const movies = await getMovies();
 

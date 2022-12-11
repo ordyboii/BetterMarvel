@@ -1,7 +1,6 @@
-import { cache } from "react";
 import { prisma } from "./db";
 
-const getRandomMovie: (movieCount: number, first?: number) => number = (
+export const getRandomMovie: (movieCount: number, first?: number) => number = (
   movieCount,
   first
 ) => {
@@ -11,15 +10,15 @@ const getRandomMovie: (movieCount: number, first?: number) => number = (
   return getRandomMovie(first, movieCount);
 };
 
-export const getMovies = cache(async () => {
+export const getMovies = async () => {
   const allMovies = await prisma.movie.findMany();
   const first = getRandomMovie(allMovies.length);
   const second = getRandomMovie(allMovies.length, first);
 
   return { movieOne: allMovies[first], movieTwo: allMovies[second] };
-});
+};
 
-export const getAllMovies = cache(() =>
+export const getAllMovies = () =>
   prisma.movie.findMany({
     orderBy: {
       votesFor: { _count: "desc" }
@@ -32,8 +31,7 @@ export const getAllMovies = cache(() =>
         select: { votesAgainst: true, votesFor: true }
       }
     }
-  })
-);
+  });
 
 export type Movies = Awaited<ReturnType<typeof getMovies>>;
 export type Movie = Awaited<ReturnType<typeof getMovies>>["movieOne"];
