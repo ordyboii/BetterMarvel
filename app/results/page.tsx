@@ -8,6 +8,8 @@ export default async function ResultsPage() {
     movie: Awaited<ReturnType<typeof getAllMovies>>[0]
   ) => {
     const { votesFor, votesAgainst } = movie._count;
+    if (votesFor + votesAgainst === 0) return 0;
+
     return (votesFor / (votesFor + votesAgainst)) * 100;
   };
 
