@@ -1,7 +1,7 @@
 "use client";
 
 import type { Movie, Movies } from "@server/movies";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type Props = {
