@@ -40,7 +40,8 @@ export default function VoteButton({ movie, movies }: Props) {
     }
 
     setVoting(false);
-    refresh();
+    // refresh();
+    window.location.reload();
   };
 
   if (!movie) return null;
