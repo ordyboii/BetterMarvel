@@ -1,6 +1,7 @@
 "use client";
 
 import type { Movie, Movies } from "@server/movies";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export default function VoteButton({ movie, movies }: Props) {
+  const { refresh } = useRouter();
   const [voting, setVoting] = useState(false);
 
   const vote = async (selected: string) => {
@@ -17,7 +19,7 @@ export default function VoteButton({ movie, movies }: Props) {
 
     if (selected === movies.movieOne?.id) {
       await fetch("/api/vote", {
-        method: "post",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           voteForId: movies.movieOne?.id,
@@ -28,7 +30,7 @@ export default function VoteButton({ movie, movies }: Props) {
 
     if (selected !== movies.movieOne?.id) {
       await fetch("/api/vote", {
-        method: "post",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           voteForId: movies.movieTwo?.id,
@@ -38,7 +40,7 @@ export default function VoteButton({ movie, movies }: Props) {
     }
 
     setVoting(false);
-    window.location.reload();
+    refresh();
   };
 
   if (!movie) return null;
