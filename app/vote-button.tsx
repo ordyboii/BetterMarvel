@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function VoteButton({ movie, movies }: Props) {
-  const { refresh } = useRouter();
+  // const { refresh, } = useRouter();
   const [voting, setVoting] = useState(false);
 
   const vote = async (selected: string) => {
