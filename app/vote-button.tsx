@@ -1,7 +1,7 @@
 "use client";
 
 import type { Movie, Movies } from "@server/movies";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function VoteButton({ movie, movies }: Props) {
-  // const { refresh, } = useRouter();
+  const { refresh } = useRouter();
   const [voting, setVoting] = useState(false);
 
   const vote = async (selected: string) => {
@@ -40,8 +40,7 @@ export default function VoteButton({ movie, movies }: Props) {
     }
 
     setVoting(false);
-    // refresh();
-    window.location.reload();
+    refresh();
   };
 
   if (!movie) return null;
