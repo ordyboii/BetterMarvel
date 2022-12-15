@@ -11,7 +11,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req.body);
   const { voteForId, voteAgainstId } = voteSchema.parse(req.body);
 
   const vote = await prisma.vote.create({
