@@ -1,5 +1,6 @@
 import { getAllMovies } from "@server/movies";
 import Image from "next/image";
+import ResultsChart from "./chart";
 
 export default async function ResultsPage() {
   const allMovies = await getAllMovies();
@@ -14,23 +15,31 @@ export default async function ResultsPage() {
   };
 
   return (
-    <section className='max-w-2xl mx-auto p-4 space-y-5'>
-      <h2 className='text-2xl'>Results Over Time</h2>
-      <h2 className='text-2xl'>All Results</h2>
-      <ul className='space-y-4'>
-        {allMovies.map(movie => (
-          <li className='shadow-md pr-4 flex gap-4 items-center bg-white sm:justify-between dark:bg-gray-700'>
-            <Image
-              src={movie.image}
-              alt={movie.title}
-              width={70}
-              height={100}
-            />
-            <h2 className='sm:text-center'>{movie.title}</h2>
-            <p>{getCountPercent(movie).toFixed(2)}%</p>
-          </li>
-        ))}
-      </ul>
+    <section className='max-w-5xl mx-auto p-4 space-y-5 grid grid-cols-1 gap-8 md:grid-cols-2'>
+      <div className='space-y-6'>
+        <h2 className='text-2xl mt-5'>Results Over Time</h2>
+        <ResultsChart movies={allMovies} />
+      </div>
+      <div className='space-y-4'>
+        <h2 className='text-2xl'>All Results</h2>
+        <ul className='space-y-4'>
+          {allMovies.map(movie => (
+            <li
+              key={movie.id}
+              className='shadow-md pr-4 flex gap-4 items-center bg-white sm:justify-between dark:bg-gray-700'
+            >
+              <Image
+                src={movie.image}
+                alt={movie.title}
+                width={70}
+                height={100}
+              />
+              <h2 className='sm:text-center'>{movie.title}</h2>
+              <p>{getCountPercent(movie).toFixed(2)}%</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }
