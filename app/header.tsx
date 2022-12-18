@@ -19,7 +19,7 @@ export default function Header() {
     dark:bg-gray-900 md:flex-row md:gap-0 md:text-left'
     >
       <h1 className='font-display text-3xl font-medium bg-red-600 max-w-fit px-4 py-2 text-white tracking-tighter'>
-        {isResults ? "Results" : "Which Marvel movie is better"}
+        {isResults ? "Results" : "Which Marvel movie is better?"}
       </h1>
 
       {!isResults && (
