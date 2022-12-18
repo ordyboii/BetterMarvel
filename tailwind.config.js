@@ -6,6 +6,9 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
+    fontFamily: {
+      display: ["var(--rubik-display)", "sans-serif"]
+    },
     extend: {}
   },
   plugins: []
