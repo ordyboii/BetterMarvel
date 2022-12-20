@@ -11,7 +11,8 @@ export default function Header() {
   const { refresh } = useRouter();
   const [isRefreshing, startTransition] = useTransition();
 
-  const isResults = pathname === "/results" ? true : false;
+  const isResults =
+    pathname === "/results" || pathname === "/results/chart" ? true : false;
 
   return (
     <header
@@ -36,7 +37,7 @@ export default function Header() {
       <div className='flex flex-col items-center gap-5 sm:flex-row'>
         <Link
           href={isResults ? "/" : "/results"}
-          className={`underline hover:opacity-80`}
+          className='block underline hover:opacity-60 focus:opacity-60'
         >
           {isResults ? "Vote for movies" : "Results"}
         </Link>
