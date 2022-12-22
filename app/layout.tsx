@@ -31,7 +31,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
         className={`${rubikMono.variable} ${rubik.className} dark:text-white`}
       >
         <Header />
-        <main className='bg-gray-100 dark:bg-gray-800'>{children}</main>
+        <main className='bg-gray-100 dark:bg-gray-800 min-h-screen'>
+          {children}
+        </main>
       </body>
     </html>
   );
