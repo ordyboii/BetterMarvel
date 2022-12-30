@@ -2,9 +2,9 @@
 
 import type { AllMovies } from "@server/movies";
 import { useMeasure } from "react-use";
+import { useState, useEffect } from "react";
 import { arc, pie, scaleBand, scaleOrdinal, schemeSet2, schemeSet3 } from "d3";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 
 type ChartInnerProps = {
   votes: { name: string; value: number }[];
